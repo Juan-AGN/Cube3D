@@ -137,7 +137,6 @@ int validate_map(t_game_data *game_data)
 			printf("There is a 0 touching a space or in a border which is invalid\n");//poner mejores mensajes
 		else
 			printf("Everything is correct\n");//poner mejores mensajes
-		free_all2(game_data);
 	}
 	return (0);
 }

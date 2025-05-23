@@ -19,7 +19,11 @@ PARSER_FILES = srcs_parser/help_functions/get_next_line.c \
 
 MLX = MLX42/build/libmlx42.a
 
-EXEC_FILES = src_exec/main_exec.c
+EXEC_FILES = src_exec/main_exec.c \
+				src_exec/player.c \
+				src_exec/ray.c \
+				src_exec/draw.c \
+				src_exec/rotate.c \
 
 OBJ = $(PARSER_FILES:%.c=%.o)
 
