@@ -10,11 +10,17 @@ typedef struct s_txtu {
 	mlx_texture_t *so_t;
 	mlx_texture_t *ea_t;
 	mlx_texture_t *we_t;
-	} t_textures;
+	} s_txtu;
 
-typedef struct s_player {
-	double 	x;
-	double 	y;
-	} t_textures;
+typedef struct s_plr {
+	int 	x;
+	int 	y;
+	double 	angle;
+	} s_plr;
+
+typedef struct s_exec {
+	struct s_game_data *cub;
+	mlx_t		*stance;
+	} s_exec;
 
 #endif

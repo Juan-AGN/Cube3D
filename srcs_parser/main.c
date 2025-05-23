@@ -50,5 +50,6 @@ int	main(int argc, char **argv) //hacer que el gnl exitee, y ver que pasa con ar
 	//print_game_data(&game_data);
 	if (validate_map(&game_data) == 1)
 		return (1);
+	main_exec(&game_data);
 	return (0);
 }

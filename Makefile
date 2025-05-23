@@ -19,7 +19,7 @@ PARSER_FILES = srcs_parser/help_functions/get_next_line.c \
 
 MLX = MLX42/build/libmlx42.a
 
-EXEC_FILES = 
+EXEC_FILES = src_exec/main_exec.c
 
 OBJ = $(PARSER_FILES:%.c=%.o)
 
@@ -28,7 +28,7 @@ EXEC_OBJ = $(EXEC_FILES:%.c=%.o)
 all: $(NAME)
 
 $(NAME): $(OBJ) $(EXEC_OBJ) $(MLX)
-	cc $(FLAGS) $(FLAGS_LINK) $(OBJ) $(EXEC_OBJ) $(MLX) -o $(NAME)
+	cc $(FLAGS) $(OBJ) $(EXEC_OBJ) $(MLX) $(FLAGS_LINK) -o $(NAME)
 
 $(MLX):
 	cmake -S MLX42 -B MLX42/build

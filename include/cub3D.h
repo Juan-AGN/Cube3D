@@ -87,6 +87,7 @@ typedef struct s_line_info {
 	void	store_final_structure(char *file, t_game_data *game_data);
 	void	copy_line_with_padding(char *dest, const char *src, int width);
 	int 	validate_map(t_game_data *game_data);
+	void	main_exec(struct s_game_data *cub);
 	
 
 #endif
