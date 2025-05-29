@@ -6,9 +6,9 @@
 # include "cub3D.h"
 # include "../MLX42/include/MLX42/MLX42.h"
 
-# define WIDTH 1920
+# define WIDTH 1102
 # define HEIGHT 1080
-# define WALL 100
+# define WALL 512
 # define FOV 60
 # define SPEED 0.1
 # define ROTATE_SPEED 10
@@ -31,6 +31,10 @@ typedef struct s_exec {
 	s_plr		player;
 	mlx_t		*stance;
 	mlx_image_t *img;
+	mlx_texture_t *no;
+	mlx_texture_t *we;
+	mlx_texture_t *so;
+	mlx_texture_t *ea;
 	} s_exec;
 
 typedef struct s_ray {
@@ -48,7 +52,9 @@ typedef struct s_ray {
 	double 	sidex;
 	double 	sidey;
 	int 	side;
-	int		hit;
+	double	hit;
+	unsigned int		wallh;
+	unsigned int 	start;
 	} s_ray;
 
 
@@ -60,7 +66,7 @@ void    cast_rays(double ray[3], s_exec *exec, int pixel);
 
 void    init_player(s_exec *exec);
 
-void    drawmlx(int pixel, double distance, s_exec *exec);
+void    drawmlx(int pixel, double distance, s_exec *exec, s_ray raytrace);
 
 void	rotate_l(s_exec *exec);
 

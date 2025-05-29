@@ -6,7 +6,7 @@
 /*   By: juan-ant <juan-ant@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/23 09:46:03 by juan-ant          #+#    #+#             */
-/*   Updated: 2025/05/23 19:16:50 by juan-ant         ###   ########.fr       */
+/*   Updated: 2025/05/29 19:27:30 by juan-ant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@ void    init_rays(s_exec *exec)
 {
 	double	ray[3];
 
-	printf("start:\n");
 	ray[0] = exec->player.ang - ((double)(FOV / 2));
 	if (ray[0] < 0)
 		ray[0] += 360;
@@ -48,7 +47,7 @@ void    cast_rays(double ray[3], s_exec *exec, int pixel)
 {
 	s_ray raytrace;
 
-	raytrace.hit = 0;
+	raytrace.hit = -1;
 	raytrace.radx = cos(ray[0] * (3.14159265358979323846 / 180.0));
 	raytrace.rady = sin(ray[0] * (3.14159265358979323846 / 180.0));
 	raytrace.x = ray[1];
@@ -61,7 +60,7 @@ void    cast_rays(double ray[3], s_exec *exec, int pixel)
     	raytrace.distance = raytrace.sidex - raytrace.deltax;
 	else
     	raytrace.distance = raytrace.sidey - raytrace.deltay;
-	drawmlx(pixel, raytrace.distance, exec);
+	drawmlx(pixel, raytrace.distance, exec, raytrace);
 }
 
 s_ray   dda(s_exec *exec, s_ray raytrace)
@@ -69,7 +68,7 @@ s_ray   dda(s_exec *exec, s_ray raytrace)
 	raytrace.deltax = fabs(1 / raytrace.radx);
 	raytrace.deltay = fabs(1 / raytrace.rady);
 	raytrace = inicialize_side_step(raytrace);
-	while (raytrace.hit != 1)
+	while (raytrace.hit == -1)
 	{
 		if (raytrace.sidex < raytrace.sidey)
 		{
@@ -83,7 +82,6 @@ s_ray   dda(s_exec *exec, s_ray raytrace)
 			raytrace.mapy += raytrace.stepy;
 			raytrace.side = 1;
 		}
-		printf("%i, %i\n", raytrace.mapy, raytrace.mapx);
 		if (exec->cub->map.grid[(int)raytrace.mapy][(int)raytrace.mapx] == '1')
         	raytrace.hit = 1;
 	}

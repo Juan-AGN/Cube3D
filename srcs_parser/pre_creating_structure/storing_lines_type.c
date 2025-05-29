@@ -18,11 +18,11 @@ int	sub_texture(char **parts, char *line, t_line_info *line_infos, int *fd_cub)
 		return (1);
 	}
 	len = ft_strlen(parts[1]);
-	if (len <= 4 || ft_strncmp(parts[1] + len - 4, ".xpm", 4) != 0)
+	/*if (len <= 4 || ft_strncmp(parts[1] + len - 4, ".xpm", 4) != 0)
 	{
 		free_array(parts);
 		return (2);
-	}
+	}*/
 	return (0);
 }
 

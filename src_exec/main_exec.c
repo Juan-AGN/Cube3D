@@ -10,15 +10,23 @@ void	gameplay(mlx_key_data_t keydata, void *param)
 	else if (keydata.key == MLX_KEY_W && keydata.action != MLX_RELEASE)
 		move_up(exec);
 	else if (keydata.key == MLX_KEY_S && keydata.action != MLX_RELEASE)
-        move_down(exec);
+	move_down(exec);
 	else if (keydata.key == MLX_KEY_A && keydata.action != MLX_RELEASE)
-        move_left(exec);
+	move_left(exec);
 	else if (keydata.key == MLX_KEY_D && keydata.action != MLX_RELEASE)
-        move_right(exec);
+	move_right(exec);
 	else if (keydata.key == MLX_KEY_Q && keydata.action != MLX_RELEASE)
-        rotate_l(exec);
+	rotate_l(exec);
 	else if (keydata.key == MLX_KEY_E && keydata.action != MLX_RELEASE)
-        rotate_r(exec);
+	rotate_r(exec);
+}
+
+void	get_images(s_exec *exec)
+{
+	exec->we = mlx_load_png(exec->cub->textures.we_path);
+	exec->ea = mlx_load_png(exec->cub->textures.ea_path);
+	exec->no = mlx_load_png(exec->cub->textures.no_path);
+	exec->so = mlx_load_png(exec->cub->textures.so_path);
 }
 
 void	main_exec(struct s_game_data *cub)
@@ -27,6 +35,7 @@ void	main_exec(struct s_game_data *cub)
     
     exec = malloc(sizeof(s_exec));
     exec->cub = cub;
+	get_images(exec);
     init_player(exec);
     exec->stance = mlx_init(WIDTH, HEIGHT, "Cub3D", false);
     exec->img = mlx_new_image(exec->stance, WIDTH, HEIGHT);
