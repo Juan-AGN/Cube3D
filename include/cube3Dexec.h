@@ -6,8 +6,8 @@
 # include "cub3D.h"
 # include "../MLX42/include/MLX42/MLX42.h"
 
-# define WIDTH 1102
-# define HEIGHT 1080
+# define WIDTH 1080
+# define HEIGHT 1090
 # define WALL 512
 # define FOV 60
 # define SPEED 0.1

@@ -7,18 +7,18 @@ void	gameplay(mlx_key_data_t keydata, void *param)
 	exec = param;
 	if (keydata.key == MLX_KEY_ESCAPE)
 		mlx_close_window(exec->stance);
-	else if (keydata.key == MLX_KEY_W && keydata.action != MLX_RELEASE)
+	if (keydata.key == MLX_KEY_W && keydata.action != MLX_RELEASE)
 		move_up(exec);
-	else if (keydata.key == MLX_KEY_S && keydata.action != MLX_RELEASE)
-	move_down(exec);
-	else if (keydata.key == MLX_KEY_A && keydata.action != MLX_RELEASE)
-	move_left(exec);
-	else if (keydata.key == MLX_KEY_D && keydata.action != MLX_RELEASE)
-	move_right(exec);
-	else if (keydata.key == MLX_KEY_Q && keydata.action != MLX_RELEASE)
-	rotate_l(exec);
-	else if (keydata.key == MLX_KEY_E && keydata.action != MLX_RELEASE)
-	rotate_r(exec);
+	if (keydata.key == MLX_KEY_S && keydata.action != MLX_RELEASE)
+		move_down(exec);
+	if (keydata.key == MLX_KEY_A && keydata.action != MLX_RELEASE)
+		move_left(exec);
+	if (keydata.key == MLX_KEY_D && keydata.action != MLX_RELEASE)
+		move_right(exec);
+	if (keydata.key == MLX_KEY_Q && keydata.action != MLX_RELEASE)
+		rotate_l(exec);
+	if (keydata.key == MLX_KEY_E && keydata.action != MLX_RELEASE)
+		rotate_r(exec);
 }
 
 void	get_images(s_exec *exec)
