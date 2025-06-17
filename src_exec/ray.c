@@ -6,7 +6,7 @@
 /*   By: juan-ant <juan-ant@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/23 09:46:03 by juan-ant          #+#    #+#             */
-/*   Updated: 2025/05/29 19:27:30 by juan-ant         ###   ########.fr       */
+/*   Updated: 2025/06/16 16:54:30 by juan-ant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,6 @@ void    init_rays(s_exec *exec)
 	double	ray[3];
 
 	ray[0] = exec->player.ang - ((double)(FOV / 2));
-	if (ray[0] < 0)
-		ray[0] += 360;
-	else if (ray[0] > 360)
-		ray[0] -= 360;
 	ray[1] = exec->player.x;
 	ray[2] = exec->player.y;
 	loop_rays(ray, exec);
@@ -32,14 +28,14 @@ void    loop_rays(double ray[3], s_exec *exec)
 	double	pixfov;
 
 	pixfov = ((float)FOV) / WIDTH;
-	pixel = 1;
-	while (pixel <= WIDTH)
+	pixel = 0;
+	while (pixel < WIDTH)
 	{
-		ray[0] += pixfov;
 		cast_rays(ray, exec, pixel);
-		if (ray[0] > 360)
+		if (ray[0] >= 360)
 			ray[0] -= 360;
 		pixel ++;
+		ray[0] += pixfov;
 	}
 }
 
@@ -48,8 +44,9 @@ void    cast_rays(double ray[3], s_exec *exec, int pixel)
 	s_ray raytrace;
 
 	raytrace.hit = -1;
-	raytrace.radx = cos(ray[0] * (3.14159265358979323846 / 180.0));
-	raytrace.rady = sin(ray[0] * (3.14159265358979323846 / 180.0));
+	raytrace.dir = ray[0];
+	raytrace.radx = cos(ray[0] * (M_PI / 180.0));
+	raytrace.rady = sin(ray[0] * (M_PI / 180.0));
 	raytrace.x = ray[1];
 	raytrace.y = ray[2];
 	raytrace.mapx = (int)ray[1];

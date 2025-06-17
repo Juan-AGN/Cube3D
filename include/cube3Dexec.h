@@ -10,8 +10,8 @@
 # define HEIGHT 1090
 # define WALL 512
 # define FOV 60
-# define SPEED 0.1
-# define ROTATE_SPEED 10
+# define SPEED 0.05
+# define ROTATE_SPEED 40
 
 typedef struct s_txtu {
 	mlx_texture_t *no_t;
@@ -25,17 +25,6 @@ typedef struct s_plr {
 	double 	y;
 	double 	ang;
 	} s_plr;
-
-typedef struct s_exec {
-	struct s_game_data *cub;
-	s_plr		player;
-	mlx_t		*stance;
-	mlx_image_t *img;
-	mlx_texture_t *no;
-	mlx_texture_t *we;
-	mlx_texture_t *so;
-	mlx_texture_t *ea;
-	} s_exec;
 
 typedef struct s_ray {
 	double 	radx;
@@ -53,10 +42,25 @@ typedef struct s_ray {
 	double 	sidey;
 	int 	side;
 	double	hit;
+	double	dir;
 	unsigned int		wallh;
 	unsigned int 	start;
 	} s_ray;
 
+typedef struct s_exec {
+	struct s_game_data *cub;
+	s_plr		player;
+	mlx_t		*stance;
+	mlx_image_t *img;
+	mlx_texture_t *no;
+	mlx_texture_t *we;
+	mlx_texture_t *so;
+	mlx_texture_t *ea;
+	s_ray			moveray;
+	} s_exec;
+
+
+double	sec_transform(double valone, double valtwo);
 
 void    init_rays(s_exec *exec);
 
@@ -83,5 +87,11 @@ void    move_right(s_exec *exec);
 s_ray	inicialize_side_step(s_ray raytrace);
 
 s_ray   dda(s_exec *exec, s_ray raytrace);
+
+int    ray_move(double play_rad, s_exec *exec);
+
+void	move_final_calc(s_exec *exec);
+
+int		angle_ifs(int side, double angle);
 
 #endif

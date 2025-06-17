@@ -1,0 +1,53 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   calculate.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: juan-ant <juan-ant@student.42malaga.com    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/06/10 15:53:50 by juan-ant          #+#    #+#             */
+/*   Updated: 2025/06/17 15:32:14 by juan-ant         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "../include/cube3Dexec.h"
+
+double	sec_transform(double valone, double valtwo)
+{
+	double toret;
+
+	toret = cos((valone * (M_PI / 180) - (valtwo * (M_PI / 180))));
+	if (toret < 0)
+		toret *= -1;
+	return (toret);
+}
+
+void	move_final_calc(s_exec *exec)
+{
+	float tomovex;
+	float tomovey;
+
+    tomovey = exec->player.y + SPEED * exec->moveray.rady;
+    tomovex = exec->player.x + SPEED * exec->moveray.radx;
+	printf("%f | %i\n",   (tomovey - 1) - exec->moveray.mapy, (int)tomovey);
+	printf("%f | %i\n",   1 - (((int)(tomovey)) - (tomovey - 1) - tomovey), (int)exec->player.x);
+	printf("%f | %i\n",   exec->moveray.mapx - tomovex , (int)exec->player.y);
+	printf("%f | %i\n",   ((int)(tomovex)) - (tomovex - 1), (int)tomovex);
+	printf("%f\n\n",   1 - (((int)(tomovex)) - (tomovex - 1)));
+	if (exec->cub->map.grid[(int)exec->player.y - 1][(int)exec->player.x] == '0' && exec->moveray.stepy < 0)
+		exec->player.y = tomovey;
+	else if (1 - (((int)(tomovey)) - (tomovey - 1)) > 0.2 && exec->moveray.stepy < 0)
+		exec->player.y = tomovey;
+	if (exec->cub->map.grid[(int)exec->player.y + 1][(int)exec->player.x] == '0' && exec->moveray.stepy > 0)
+		exec->player.y = tomovey;
+	else if (((int)(tomovey)) - (tomovey - 1) > 0.2 && exec->moveray.stepy > 0)
+		exec->player.y = tomovey;
+	if (exec->cub->map.grid[(int)exec->player.y][(int)exec->player.x - 1] == '0' && exec->moveray.stepx < 0)
+		exec->player.x = tomovex;
+	else if (1 - (((int)(tomovex)) - (tomovex - 1)) > 0.2 && exec->moveray.stepx < 0)
+		exec->player.x = tomovex;
+	if (exec->cub->map.grid[(int)exec->player.y][(int)exec->player.x + 1] == '0' && exec->moveray.stepx > 0)
+		exec->player.x = tomovex;
+	else if (((int)(tomovex)) - (tomovex - 1) > 0.2 && exec->moveray.stepx > 0)
+		exec->player.x = tomovex;
+}

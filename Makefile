@@ -24,6 +24,9 @@ EXEC_FILES = src_exec/main_exec.c \
 				src_exec/ray.c \
 				src_exec/draw.c \
 				src_exec/rotate.c \
+				src_exec/calculate.c \
+				src_exec/extra_ifs.c \
+				src_exec/controls_aux.c
 
 OBJ = $(PARSER_FILES:%.c=%.o)
 
