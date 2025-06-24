@@ -6,7 +6,7 @@
 /*   By: juan-ant <juan-ant@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/23 14:08:13 by juan-ant          #+#    #+#             */
-/*   Updated: 2025/06/10 17:08:09 by juan-ant         ###   ########.fr       */
+/*   Updated: 2025/06/23 10:42:51 by juan-ant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,8 @@ uint32_t    get_texture_pixel(mlx_texture_t *texture, int size, int i, double co
 	uint32_t	pixel;
 	uint32_t    transformed;
 
-	img_h = ((texture->height * i) / size) * texture->width;
-	img_w = (int)(texture->width * (coord - (int)coord));
+	img_h = (((texture->height - 1) * i) / size) * texture->width;
+	img_w = texture->width - (int)(texture->width * (coord - (int)coord));
 	pixel = (img_h + img_w) * texture->bytes_per_pixel;
 	r = texture->pixels[pixel];
 	g = texture->pixels[pixel + 1];
@@ -59,9 +59,9 @@ uint32_t    texture_pixel(s_ray raytrace, s_exec *exec, int i)
 	else if (raytrace.side == 0 && raytrace.stepx > 0)
 		return (get_texture_pixel(exec->ea, raytrace.wallh, i - raytrace.start, raytrace.hit));
 	else if (raytrace.side == 1 && raytrace.stepy < 0)
-		return (get_texture_pixel(exec->so, raytrace.wallh, i - raytrace.start, raytrace.hit));
-	else if (raytrace.side == 1 && raytrace.stepy > 0)
 		return (get_texture_pixel(exec->no, raytrace.wallh, i - raytrace.start, raytrace.hit));
+	else if (raytrace.side == 1 && raytrace.stepy > 0)
+		return (get_texture_pixel(exec->so, raytrace.wallh, i - raytrace.start, raytrace.hit));
 	else
 		return (transform_color(exec, 1));
 }

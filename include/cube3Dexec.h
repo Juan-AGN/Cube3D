@@ -8,10 +8,10 @@
 
 # define WIDTH 1080
 # define HEIGHT 1090
-# define WALL 512
+# define WALL 52
 # define FOV 60
 # define SPEED 0.05
-# define ROTATE_SPEED 40
+# define ROTATE_SPEED 50
 
 typedef struct s_txtu {
 	mlx_texture_t *no_t;
