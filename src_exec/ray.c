@@ -5,14 +5,14 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: juan-ant <juan-ant@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/23 09:46:03 by juan-ant          #+#    #+#             */
-/*   Updated: 2025/06/16 16:54:30 by juan-ant         ###   ########.fr       */
+/*   Created: 2025/06/30 12:57:22 by juan-ant          #+#    #+#             */
+/*   Updated: 2025/06/30 14:43:06 by juan-ant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cube3Dexec.h"
 
-void    init_rays(s_exec *exec)
+void	init_rays(s_exec *exec)
 {
 	double	ray[3];
 
@@ -22,7 +22,7 @@ void    init_rays(s_exec *exec)
 	loop_rays(ray, exec);
 }
 
-void    loop_rays(double ray[3], s_exec *exec)
+void	loop_rays(double ray[3], s_exec *exec)
 {
 	int		pixel;
 	double	pixfov;
@@ -39,11 +39,12 @@ void    loop_rays(double ray[3], s_exec *exec)
 	}
 }
 
-void    cast_rays(double ray[3], s_exec *exec, int pixel)
+void	cast_rays(double ray[3], s_exec *exec, int pixel)
 {
-	s_ray raytrace;
+	s_ray	raytrace;
 
 	raytrace.hit = -1;
+	raytrace.pixel = 0;
 	raytrace.dir = ray[0];
 	raytrace.radx = cos(ray[0] * (M_PI / 180.0));
 	raytrace.rady = sin(ray[0] * (M_PI / 180.0));
@@ -54,13 +55,13 @@ void    cast_rays(double ray[3], s_exec *exec, int pixel)
 	raytrace.distance = 0;
 	raytrace = dda(exec, raytrace);
 	if (raytrace.side == 0)
-    	raytrace.distance = raytrace.sidex - raytrace.deltax;
+		raytrace.distance = raytrace.sidex - raytrace.deltax;
 	else
-    	raytrace.distance = raytrace.sidey - raytrace.deltay;
+		raytrace.distance = raytrace.sidey - raytrace.deltay;
 	drawmlx(pixel, raytrace.distance, exec, raytrace);
 }
 
-s_ray   dda(s_exec *exec, s_ray raytrace)
+s_ray	dda(s_exec *exec, s_ray raytrace)
 {
 	raytrace.deltax = fabs(1 / raytrace.radx);
 	raytrace.deltay = fabs(1 / raytrace.rady);
@@ -80,7 +81,7 @@ s_ray   dda(s_exec *exec, s_ray raytrace)
 			raytrace.side = 1;
 		}
 		if (exec->cub->map.grid[(int)raytrace.mapy][(int)raytrace.mapx] == '1')
-        	raytrace.hit = 1;
+			raytrace.hit = 1;
 	}
 	return (raytrace);
 }
@@ -89,22 +90,22 @@ s_ray	inicialize_side_step(s_ray raytrace)
 {
 	if (raytrace.radx < 0)
 	{
-    	raytrace.stepx = -1;
+		raytrace.stepx = -1;
 		raytrace.sidex = (raytrace.x - raytrace.mapx) * raytrace.deltax;
 	}
 	else
 	{
-    	raytrace.stepx = 1;
+		raytrace.stepx = 1;
 		raytrace.sidex = (raytrace.mapx + 1 - raytrace.x) * raytrace.deltax;
 	}
 	if (raytrace.rady < 0)
 	{
-    	raytrace.stepy = -1;
+		raytrace.stepy = -1;
 		raytrace.sidey = (raytrace.y - raytrace.mapy) * raytrace.deltay;
 	}
 	else
 	{
-    	raytrace.stepy = 1;
+		raytrace.stepy = 1;
 		raytrace.sidey = (raytrace.mapy + 1 - raytrace.y) * raytrace.deltay;
 	}
 	return (raytrace);

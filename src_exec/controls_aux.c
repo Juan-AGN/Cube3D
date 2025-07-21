@@ -5,14 +5,14 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: juan-ant <juan-ant@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/16 14:34:36 by juan-ant          #+#    #+#             */
-/*   Updated: 2025/06/17 14:00:03 by juan-ant         ###   ########.fr       */
+/*   Created: 2025/06/30 12:58:34 by juan-ant          #+#    #+#             */
+/*   Updated: 2025/06/30 14:42:53 by juan-ant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cube3Dexec.h"
 
-void   move_dda_calc(s_exec *exec)
+void	move_dda_calc(s_exec *exec)
 {
 	if (exec->moveray.sidex < exec->moveray.sidey)
 	{
@@ -27,12 +27,12 @@ void   move_dda_calc(s_exec *exec)
 		exec->moveray.side = 1;
 	}
 	if (exec->moveray.side == 0)
-    	exec->moveray.distance = exec->moveray.sidex - exec->moveray.deltax;
+		exec->moveray.distance = exec->moveray.sidex - exec->moveray.deltax;
 	else
-    	exec->moveray.distance = exec->moveray.sidey - exec->moveray.deltay;
+		exec->moveray.distance = exec->moveray.sidey - exec->moveray.deltay;
 }
 
-int   move_dda(s_exec *exec)
+int	move_dda(s_exec *exec)
 {
 	exec->moveray.deltax = fabs(1 / exec->moveray.radx);
 	exec->moveray.deltay = fabs(1 / exec->moveray.rady);
@@ -40,20 +40,22 @@ int   move_dda(s_exec *exec)
 	while (exec->moveray.hit == -1)
 	{
 		move_dda_calc(exec);
-		if (exec->cub->map.grid[(int)(exec->moveray.mapy)][(int)(exec->moveray.mapx)] == '1')
-        	exec->moveray.hit = 1;
+		if (exec->cub->map.grid[(int)(exec->moveray.mapy)]
+			[(int)(exec->moveray.mapx)] == '1')
+			exec->moveray.hit = 1;
 	}
 	if (exec->moveray.distance > 0.2)
 		return (1);
 	return (0);
 }
 
-int    cast_ray_move(double ray[4], s_exec *exec)
+int	cast_ray_move(double ray[4], s_exec *exec)
 {
 	s_ray	mray;
 
 	mray.hit = -1;
 	exec->moveray = mray;
+	exec->moveray.pixel = 0;
 	exec->moveray.dir = ray[0];
 	exec->moveray.radx = cos(ray[0] * (M_PI / 180.0));
 	exec->moveray.rady = sin(ray[0] * (M_PI / 180.0));
@@ -65,7 +67,7 @@ int    cast_ray_move(double ray[4], s_exec *exec)
 	return (move_dda(exec));
 }
 
-int    loop_rays_move(double ray[4], s_exec *exec)
+int	loop_rays_move(double ray[4], s_exec *exec)
 {
 	int		pixel;
 	double	pixfov;
@@ -75,19 +77,19 @@ int    loop_rays_move(double ray[4], s_exec *exec)
 	while (pixel <= 90)
 	{
 		if (cast_ray_move(ray, exec) == 1)
-			return 1;
+			return (1);
 		if (ray[0] >= 360)
 			ray[0] -= 360;
 		pixel += 2;
 		if (ray[3] == 1)
 			ray[0] += pixfov;
 		else
-			ray[0] -= pixfov;	
+			ray[0] -= pixfov;
 	}
 	return (0);
 }
 
-int   ray_move(double play_rad, s_exec *exec)
+int	ray_move(double play_rad, s_exec *exec)
 {
 	double	ray[4];
 

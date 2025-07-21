@@ -6,8 +6,8 @@
 # include "cub3D.h"
 # include "../MLX42/include/MLX42/MLX42.h"
 
-# define WIDTH 1080
-# define HEIGHT 1090
+# define WIDTH 320
+# define HEIGHT 200
 # define WALL 52
 # define FOV 60
 # define SPEED 0.05
@@ -45,6 +45,7 @@ typedef struct s_ray {
 	double	dir;
 	unsigned int		wallh;
 	unsigned int 	start;
+	int		pixel;
 	} s_ray;
 
 typedef struct s_exec {
