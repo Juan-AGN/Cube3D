@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   validate_map.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: luialvar <luialvar@student.42malaga.c      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/08/07 12:02:17 by luialvar          #+#    #+#             */
+/*   Updated: 2025/08/07 12:02:19 by luialvar         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../include/cub3D.h"
 
-void	free_all2(t_game_data *game_data)
+void	free_all_second(t_game_data *game_data)
 {
 	if (game_data->textures.no_path != NULL)
 		free (game_data->textures.no_path);
@@ -127,14 +139,17 @@ int validate_map(t_game_data *game_data)
 	}
 	if (check_determine_player_position(game_data) == 1)
 	{
-		free_all2(game_data);
+		free_all_second(game_data);
 		printf("Except for the information in the map, the data in the file is correct\n");
 		return (1);
 	}
 	else
 	{
 		if (algorithm_validating_map(game_data) == 1)
+		{
 			printf("There is a 0 touching a space or in a border which is invalid\n");//poner mejores mensajes
+			return (1);
+		}
 		else
 			printf("Everything is correct\n");//poner mejores mensajes
 	}

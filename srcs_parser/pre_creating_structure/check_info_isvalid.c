@@ -124,7 +124,7 @@ int check_texture(t_line_info line_infos, int i)
 	if (line_infos.type == 2)
 		color = "NO";
 	if (line_infos.type == 3)
-		color = "NO";
+		color = "SO";
 	if (line_infos.type == 4)
 		color = "EA";
 	if (line_infos.type == 5)

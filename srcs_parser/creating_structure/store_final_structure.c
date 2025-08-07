@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   store_final_structure.c                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: luialvar <luialvar@student.42malaga.c      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/08/07 12:01:38 by luialvar          #+#    #+#             */
+/*   Updated: 2025/08/07 12:01:46 by luialvar         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../include/cub3D.h"
 
 void	free_all(char *line, t_game_data *game_data, int *fd)
@@ -17,7 +29,7 @@ void	free_all(char *line, t_game_data *game_data, int *fd)
 	exit(1);
 }
 
-void	store_struct_line(char *line, t_game_data *game_data, int *fd, int max_width_map)
+void	str_line(char *line, t_game_data *game_data, int *fd, int max_width_map)
 {
 	char **parts;
 	char **second_parts;
@@ -212,7 +224,7 @@ void	store_final_structure(char *file, t_game_data *game_data)
 		len = ft_strlen(line);
 		if (len > 0 && line[len - 1] == '\n')
 			line[len - 1] = '\0';
-		store_struct_line(line, game_data, &fd_cub, max_width_map);
+		str_line(line, game_data, &fd_cub, max_width_map);
 		free(line);
 	}
 	close(fd_cub);
