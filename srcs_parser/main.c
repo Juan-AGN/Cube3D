@@ -46,7 +46,7 @@ int	main(int argc, char **argv)
 		len = ft_strlen(line);
 		if (len > 0 && line[len - 1] == '\n')
 			line[len - 1] = '\0';
-		store_info_line(line, &line_infos[count_lines], line_infos, &fd_cub);
+		infoln(line, &line_infos[count_lines], line_infos, &fd_cub);
 		count_lines++;
 		free(line);
 	}
@@ -99,7 +99,7 @@ static void	read_and_store_lines(int fd, t_line_info *infos)
 		len = ft_strlen(line);
 		if (len && line[len - 1] == '\n')
 			line[len - 1] = '\0';
-		store_info_line(line, &infos[i], infos, &fd);
+		infoln(line, &infos[i], infos, &fd);
 		i++;
 		free(line);
 		line = get_next_line(fd);
@@ -119,7 +119,6 @@ static void	final_stage(t_line_info *infos, char **argv)
 	}
 	free(infos);
 	store_final_structure(argv[1], &game_data);
-	print_game_data(&game_data);
 	if (validate_map(&game_data) == 1)
 	{
 		free_all_second(&game_data);
