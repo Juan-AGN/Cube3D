@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   check_program_params.c                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: luialvar <luialvar@student.42malaga.com>   +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/08/09 22:21:36 by luialvar          #+#    #+#             */
+/*   Updated: 2025/08/09 22:21:37 by luialvar         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../include/cub3D.h"
 
 void	check_cub(char **argv)
@@ -35,9 +47,9 @@ int	check_valid_params(int argc, char **argv)
 	{
 		write(2, "Invalid number of arguments passed to the program\n", 50);
 		exit (1);
-	}	
+	}
 	check_cub(argv);
- 	fd = open(argv[1], O_RDONLY);
+	fd = open(argv[1], O_RDONLY);
 	if (fd == -1)
 	{
 		perror("Error: Input");
