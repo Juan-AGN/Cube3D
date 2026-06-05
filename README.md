@@ -86,13 +86,21 @@ make re
 ## 📁 Project Structure
 
 .
+
 ├── include/
+
 ├── srcs_parser/
+
 ├── src_exec/
+
 ├── textures/
+
 ├── tests/
+
 ├── MLX42/
+
 ├── Makefile
+
 └── README.md
 
 ---
