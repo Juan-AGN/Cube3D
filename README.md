@@ -79,7 +79,7 @@ make re
 
 ## 🚀 Execution
 
-./cub3D maps/example.cub
+./cub3D tests/valid.cub
 
 ---
 
